@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=400" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>MindScope</title>
+</head>
+<body>
+  <!-- ===== 主界面 ===== -->
+  <div id="app">
+
+    <!-- 头部 -->
+    <header class="header">
+      <div class="header-left">
+        <span class="logo-icon">◎</span>
+        <div class="logo-text">
+          <h1>MindScope</h1>
+          <span class="logo-sub">思维透视</span>
+        </div>
+      </div>
+      <button id="settingsBtn" class="icon-btn" title="设置">⚙</button>
+    </header>
+
+    <!-- 设置面板（初始隐藏） -->
+    <div id="settingsPanel" class="settings-panel hidden">
+      <h3>⚙ API 配置</h3>
+      <div class="form-group">
+        <label>API 密钥</label>
+        <input type="password" id="apiKey" placeholder="sk-..." />
+      </div>
+      <div class="form-group">
+        <label>API 地址</label>
+        <input type="url" id="apiEndpoint" placeholder="https://api.openai.com/v1/chat/completions" />
+      </div>
+      <div class="form-group">
+        <label>模型名称</label>
+        <input type="text" id="modelName" placeholder="gpt-4o-mini" />
+      </div>
+      <div class="form-actions">
+        <button id="saveSettingsBtn" class="btn btn-primary">保存</button>
+        <button id="testApiBtn" class="btn btn-outline">测试连接</button>
+      </div>
+      <p id="settingsStatus" class="status-text"></p>
+
+      <details class="provider-tips">
+        <summary>💡 推荐的 API 服务商</summary>
+        <ul>
+          <li><strong>DeepSeek（国内首选）</strong><br/>接口: https://api.deepseek.com/v1/chat/completions<br/>模型: deepseek-chat<br/>价格极低，国内可直连</li>
+          <li><strong>OpenAI</strong><br/>接口: https://api.openai.com/v1/chat/completions<br/>模型: gpt-4o-mini（推荐）或 gpt-4o</li>
+          <li><strong>Anthropic (Claude)</strong><br/>接口: https://api.anthropic.com/v1/messages<br/>模型: claude-sonnet-4-20250514<br/>分析质量极高</li>
+        </ul>
+      </details>
+    </div>
+
+    <!-- 主要内容区 -->
+    <div id="mainContent" class="main-content">
+
+      <!-- 状态：未分析 -->
+      <div id="stateReady" class="state-view">
+        <div class="ready-icon">◎</div>
+        <p class="ready-text">点击下方按钮，分析当前页面</p>
+        <button id="analyzeBtn" class="btn btn-primary btn-large">🔍 分析此页面</button>
+        <div id="pageInfo" class="page-info"></div>
+      </div>
+
+      <!-- 状态：分析中 -->
+      <div id="stateLoading" class="state-view hidden">
+        <div class="spinner"></div>
+        <p id="loadingStatus" class="loading-text">正在提取页面内容...</p>
+      </div>
+
+      <!-- 状态：分析结果 -->
+      <div id="stateResult" class="state-view hidden">
+        <div class="result-header">
+          <h2 class="result-title">分析报告</h2>
+          <span id="scoreBadge" class="score-badge"></span>
+        </div>
+        <div id="resultContent" class="result-content"></div>
+        <div class="result-actions">
+          <button id="reanalyzeBtn" class="btn btn-outline btn-small">🔄 重新分析</button>
+        </div>
+      </div>
+
+      <!-- 状态：错误 -->
+      <div id="stateError" class="state-view hidden">
+        <div class="error-icon">✕</div>
+        <p id="errorText" class="error-text"></p>
+        <button id="retryBtn" class="btn btn-primary btn-small">重试</button>
+      </div>
+
+      <!-- 状态：需要配置 -->
+      <div id="stateConfig" class="state-view hidden">
+        <div class="config-icon">⚙</div>
+        <p>请先配置 API 密钥才能使用</p>
+        <button id="goToSettingsBtn" class="btn btn-primary">去配置</button>
+      </div>
+
+    </div>
+
+    <!-- 底部 -->
+    <footer class="footer">
+      <span>分析结果由 AI 生成，仅供参考</span>
+    </footer>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "MindScope - 思维透视",
+  "version": "1.0.0",
+  "description": "一键透视网页：说服技巧、情绪操纵、认知偏误、隐藏信息分析",
+  "permissions": ["activeTab", "storage", "scripting"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "MindScope - 思维透视"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+"icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
